@@ -8,8 +8,8 @@ extends CharacterBody3D
 @export var aim_max_angle := 90
 @export var aim_min_angle := -90
 
-var gravity := ProjectSettings.get_setting("physics/3d/default_gravity")
-var look_rot := Vector3.FORWARD
+var gravity := ProjectSettings.get_setting("physics/3d/default_gravity") as float
+var look_rot := Vector3.UP
 
 @onready var head := $Head as Node3D
 
