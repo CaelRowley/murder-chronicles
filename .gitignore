@@ -16,3 +16,6 @@ mono_crash.*.json
 
 # Imported assets
 src/imports/*
+
+# private env variables
+src/config/config.cfg

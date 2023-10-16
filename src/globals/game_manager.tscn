@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cenoc5j8cykys"]
+
+[ext_resource type="Script" path="res://globals/game_manager.gd" id="1_jotjp"]
+
+[node name="GameManager" type="Node"]
+script = ExtResource("1_jotjp")
+dialogue_rules = "You are in a fantasy RPG engaging me in conversation roleplaying as a single character. Reply to my questions and never break character. Don't mention that you are an AI or that this is a game. Only respond with your specific character dialogue text and nothing else, but you can imply actions with **. For example: *laughs manically*."
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]

@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://c72gyq6o6302"]
+
+[ext_resource type="Script" path="res://npcs/npc.gd" id="1_pl7n0"]
+[ext_resource type="Texture2D" uid="uid://btcaq7m2x6qkf" path="res://assets/sprites/Characters/tile_0084.png" id="2_u3fuo"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2jptc"]
+radius = 6.0
+height = 16.0
+
+[node name="NpcWizard" type="CharacterBody2D" groups=["NPC"]]
+position = Vector2(-86, 15)
+motion_mode = 1
+script = ExtResource("1_pl7n0")
+icon = ExtResource("2_u3fuo")
+physical_description = "An old wizard with a purple robe and long white beard.	"
+location_description = "Standing by a tree between 2 houses."
+personality = "Wise, smart, mysterious."
+secret_knowledge = "You know the password to gain access to the knight's house. It is the word \"Mellon\" the elvish word for friend."
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_u3fuo")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_2jptc")

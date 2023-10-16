@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://bm0yitxiojkw8"]
+
+[ext_resource type="Script" path="res://player/player.gd" id="1_8c5ii"]
+[ext_resource type="Texture2D" uid="uid://dp6t2txysolu1" path="res://assets/sprites/Characters/tile_0085.png" id="2_b0fe8"]
+[ext_resource type="Script" path="res://player/talk_trigger.gd" id="3_dtpsf"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2jptc"]
+radius = 6.0
+height = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kfgjn"]
+radius = 19.0
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(79, 28)
+motion_mode = 1
+script = ExtResource("1_8c5ii")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_2jptc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+texture = ExtResource("2_b0fe8")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)
+
+[node name="TalkTrigger" type="Area2D" parent="."]
+script = ExtResource("3_dtpsf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TalkTrigger"]
+shape = SubResource("CircleShape2D_kfgjn")
+
+[connection signal="body_entered" from="TalkTrigger" to="TalkTrigger" method="_on_body_entered"]
+[connection signal="body_exited" from="TalkTrigger" to="TalkTrigger" method="_on_body_exited"]
