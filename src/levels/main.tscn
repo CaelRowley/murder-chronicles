@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://c5nbrekqelxtr"]
+[gd_scene load_steps=9 format=3 uid="uid://c5nbrekqelxtr"]
 
 [ext_resource type="PackedScene" uid="uid://cgdywx700fjva" path="res://ui/dialogue_box.tscn" id="1_odqsr"]
 [ext_resource type="Texture2D" uid="uid://dsufbsvdyeyme" path="res://assets/sprites/tilemap_packed.png" id="2_jwah0"]
 [ext_resource type="PackedScene" uid="uid://bm0yitxiojkw8" path="res://player/player.tscn" id="3_dhkl5"]
 [ext_resource type="PackedScene" uid="uid://c72gyq6o6302" path="res://npcs/npc_wizard.tscn" id="4_3igve"]
 [ext_resource type="PackedScene" uid="uid://1pnxehbc6jte" path="res://npcs/npc_knight.tscn" id="5_huha6"]
+[ext_resource type="PackedScene" uid="uid://de1offyjt44m3" path="res://dalle/dalle_test.tscn" id="6_uqtqw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_24k11"]
 texture = ExtResource("2_jwah0")
@@ -168,3 +169,6 @@ layer_1/tile_data = PackedInt32Array(-65548, 262144, 0, -12, 262144, 1, 65531, 2
 [node name="NpcWizard" parent="." instance=ExtResource("4_3igve")]
 
 [node name="NpcKnight" parent="." instance=ExtResource("5_huha6")]
+
+[node name="DalleTest" parent="." instance=ExtResource("6_uqtqw")]
+position = Vector2(-24, 72)
