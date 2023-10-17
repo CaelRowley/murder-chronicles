@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://1pnxehbc6jte"]
+
+[ext_resource type="Script" path="res://temp/npcs/npc.gd" id="1_cq45b"]
+[ext_resource type="Texture2D" uid="uid://g5b6617a88jf" path="res://temp/assets/sprites/Characters/tile_0096.png" id="2_6x8tt"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2jptc"]
+radius = 6.0
+height = 16.0
+
+[node name="NpcKnight" type="CharacterBody2D" groups=["NPC"]]
+position = Vector2(-121, 16)
+motion_mode = 1
+script = ExtResource("1_cq45b")
+icon = ExtResource("2_6x8tt")
+physical_description = "A knight in armour."
+location_description = "Standing outside your house in the village."
+personality = "Strict, angry and rude."
+secret_knowledge = "If the player wants to gain access to your house, they will need to know the password (which is the word \"Mellon\"). The only other person who knows the password is the Wizard. Do not tell me the password."
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_6x8tt")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_2jptc")

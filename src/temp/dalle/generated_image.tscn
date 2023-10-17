@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7y4nnfjm5skv"]
+
+[ext_resource type="Script" path="res://temp/dalle/generated_image.gd" id="1_bwomm"]
+
+[node name="GeneratedImage" type="Node2D"]
+script = ExtResource("1_bwomm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
