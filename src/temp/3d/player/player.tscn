@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3ffql15mo0aj"]
+
+[ext_resource type="Script" path="res://temp/3d/player/player.gd" id="1_ynvwl"]
+[ext_resource type="Material" uid="uid://b4gwd5h7ixvct" path="res://temp/3d/materials/player.tres" id="2_nxaij"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u6tj1"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_6tv51"]
+material = ExtResource("2_nxaij")
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("1_ynvwl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_u6tj1")
+
+[node name="PlaceholderMesh" type="MeshInstance3D" parent="CollisionShape3D"]
+mesh = SubResource("CapsuleMesh_6tv51")
+
+[node name="CameraController" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraController"]
+
+[node name="ReflectionProbe" type="ReflectionProbe" parent="CameraController/Camera3D"]
+update_mode = 1
+enable_shadows = true
