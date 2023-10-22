@@ -1,11 +1,13 @@
-extends Node2D
+class_name Dalle
+extends Node
 
 const CONFIG_FILE := "res://config/config.cfg"
-const GeneratedImage = preload("res://temp/dalle/generated_image.tscn")
+
 
 @export_category("OpenAI API Configuration")
+@export var dalle_sprite: Sprite3D
 @export var url := "https://api.openai.com/v1/images/generations"
-@export var headers := ["Content-type: application/json"] as Array[String]
+@export var headers: Array[String] = ["Content-type: application/json"]
 
 var request_url: HTTPRequest
 var request_image: HTTPRequest
@@ -53,6 +55,4 @@ func _on_request_image_completed(_result: int, _response_code: int, _headers: Pa
 	if err != OK:
 		print("Couldn't load image.")
 	var texture := ImageTexture.create_from_image(image)
-	var generated_image := GeneratedImage.instantiate()
-	add_child(generated_image)
-	generated_image.set_image(texture)
+	dalle_sprite.texture = texture

@@ -1,10 +1,12 @@
-[gd_scene load_steps=15 format=3 uid="uid://b1yleqbb8tc7x"]
+[gd_scene load_steps=21 format=3 uid="uid://b1yleqbb8tc7x"]
 
 [ext_resource type="Environment" uid="uid://dsay4gdr8k6ur" path="res://temp/3d/levels/environment.tres" id="1_q7ut6"]
 [ext_resource type="Script" path="res://temp/3d/levels/level.gd" id="1_v5xb0"]
 [ext_resource type="Material" uid="uid://cn1gsy15bkaff" path="res://temp/3d/materials/grid.tres" id="2_ykmx4"]
 [ext_resource type="Texture2D" uid="uid://ivvpsi314b34" path="res://temp/3d/textures/grid.jpg" id="3_6n16x"]
 [ext_resource type="PackedScene" uid="uid://c3ffql15mo0aj" path="res://temp/3d/player/player.tscn" id="4_ayp8r"]
+[ext_resource type="Script" path="res://temp/3d/levels/dalle.gd" id="6_ned6i"]
+[ext_resource type="Script" path="res://temp/3d/levels/button.gd" id="7_2t6qi"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_gd0ev"]
 material = ExtResource("2_ykmx4")
@@ -120,6 +122,18 @@ size = Vector3(8, 2, 2)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_j6kcl"]
 data = PackedVector3Array(-4, 1, 1, 4, -1, 1, -4, -1, 1, -4, 1, -1, -4, -1, -1, 4, -1, -1, -4, 1, 1, -4, 1, -1, 4, -1, 1, -4, 1, -1, 4, -1, -1, 4, -1, 1, -4, 1, -1, -4, 1, 1, -4, -1, -1, -4, 1, 1, -4, -1, 1, -4, -1, -1, -4, -1, 1, 4, -1, 1, -4, -1, -1, 4, -1, 1, 4, -1, -1, -4, -1, -1)
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_17688"]
+size = Vector2(256, 256)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_w3ot4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ibr6l"]
+albedo_color = Color(1, 0, 0, 1)
+roughness = 0.24
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_we6nl"]
+points = PackedVector3Array(-0.214183, -0.948028, -0.451129, 0.0227317, 0.952146, 0.498887, 0.171488, 0.951995, 0.469018, -0.125934, 0.952684, -0.483291, 0.499663, -0.953674, -0.00688883, -0.387646, -0.93796, 0.315653, -0.483292, 0.952686, -0.12593, 0.375097, 0.940128, -0.329816, 0.171488, -0.951995, 0.469018, 0.140783, -0.945485, -0.479579, 0.469014, 0.952011, 0.171499, -0.387646, 0.93796, 0.315653, -0.483292, -0.952686, -0.12593, -0.183511, -0.943076, 0.464698, 0.407412, -0.946994, 0.288983, 0.375097, -0.940128, -0.329816, -0.395154, 0.955761, -0.305523, -0.479555, 0.945437, 0.14088, 0.464698, 0.943099, -0.183512, 0.140783, 0.945485, -0.479579, -0.243203, 0.945955, 0.436491, -0.479555, -0.945437, 0.14088, 0.288971, 0.946988, 0.407421, -0.395154, -0.955761, -0.305523, -0.0069906, -0.953641, 0.499658, 0.499663, 0.953674, -0.00688883, -0.271948, 0.943071, -0.419217, 0.464698, -0.943099, -0.183512, -0.125934, -0.952684, -0.483291, 0.315648, 0.937973, -0.387651, 0.469014, -0.952011, 0.171499, 0.407412, 0.946994, 0.288983)
+
 [node name="Level" type="Node3D"]
 script = ExtResource("1_v5xb0")
 
@@ -161,5 +175,39 @@ shape = SubResource("ConcavePolygonShape3D_j6kcl")
 [node name="CharacterBody3D" parent="." instance=ExtResource("4_ayp8r")]
 tilt_lower_limit = -80.0
 tilt_upper_limit = 80.0
+
+[node name="DallePicture" type="Sprite3D" parent="."]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, -0.99934, 0.991418, -3.99983)
+double_sided = false
+texture = SubResource("PlaceholderTexture2D_17688")
+
+[node name="Dalle" type="Node" parent="DallePicture" node_paths=PackedStringArray("dalle_sprite")]
+script = ExtResource("6_ned6i")
+dalle_sprite = NodePath("..")
+
+[node name="Button" type="MeshInstance3D" parent="." node_paths=PackedStringArray("dalle")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-09, -1, 0, 0.1, -4.37114e-08, 0.987, 1.056, -3.93338)
+mesh = SubResource("CylinderMesh_w3ot4")
+surface_material_override/0 = SubResource("StandardMaterial3D_ibr6l")
+script = ExtResource("7_2t6qi")
+dalle = NodePath("../DallePicture/Dalle")
+
+[node name="Area3D" type="Area3D" parent="Button"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.80582, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Button/Area3D"]
+shape = SubResource("ConvexPolygonShape3D_we6nl")
+
+[node name="Box2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.02149, 1, -5)
+mesh = SubResource("BoxMesh_xc4gq")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Box2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box2/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_vp4dy")
+
+[connection signal="body_entered" from="Button/Area3D" to="Button" method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Button/Area3D" to="Button" method="_on_area_3d_body_exited"]
 
 [editable path="CharacterBody3D"]
